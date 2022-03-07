@@ -89,5 +89,11 @@ class UsersSeeder extends Seeder
             'user_id'      => '6',
             'perfil'       => 'M',
         ]);
+        task::create([
+            'text'      => 'Definir versão do Moodle',
+            'detalhe'      => 'A versão deve ser estável',
+            'proj_id'      => '1',
+            'duration'  =>'0'
+        ]);
     }
 }
