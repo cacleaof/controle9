@@ -11,13 +11,16 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
 
     <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dados Usuário</button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><a class="dropdown-item" href="logout">Mudar Senha</a></li>
+          <li><a class="dropdown-item" href="{{ route('logout')  }}">Perfil</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Separated link</a></li>
+          <li><a class="dropdown-item" href="{{ route('logout')  }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">SAIR</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form></li>
+         
         </ul>
         <input type="text" class="form-control" aria-label="Text input with dropdown button">
       </div>
@@ -65,10 +68,10 @@
     <center><h1>Bem-vindo ao Sistema de Projetos TELESSAUDE</h1></center>
     <div class="container">
       <div class="d-grid gap-2 d-md-block">
-    <button class="btn btn-lg btn-blue" style="background-color: #b2d9f7">EXECUÇÃO - DIARIO</button>
-    <button class="btn btn-lg btn-segunda" style="background-color: #487aa1">PLANO - Atividades e Projetos</button>
-    <button class="btn btn-lg btn-terceira" style="background-color: #7c8071" href="admin/n_proj" >PLANO - Novo Projeto</button>
-    <button class="btn btn-lg btn-quarta" style="background-color: #dde3ca" >PLANO - Nova Tarefa</button>
+    <a class="btn btn-lg btn-primeira" style="background-color: #b2d9f7" href="admin/n_proj" role="button">EXECUÇÃO - DIARIO</a>
+    <a class="btn btn-lg btn-segunda"  style="background-color: #487aa1" href="admin/n_proj" role="button">PLANO - Atividades e Projetos</a>
+    <a class="btn btn-lg btn-terceira" style="background-color: #7c8071" href="admin/n_proj" role="button">PLANO - Novo Projeto</a>
+    <a class="btn btn-lg btn-quarta" style="background-color: #dde3ca" href="admin/n_proj" role="button">PLANO - Nova Tarefa</a>
   
 </div>
 </div>

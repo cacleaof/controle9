@@ -65,8 +65,22 @@ services:
     redis:
         container_name: especializati-redis
         image: redis:latest
+        restart: unless-stopped
         networks: 
             - laravel-9
+    phpmyadmin:
+        container_name: madmin
+        image: phpmyadmin:fpm
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            - PMA_ARBITRARY=1
+        depends_on: 
+            - mysql
+        networks: 
+            - laravel-9
+
 
 networks: 
     laravel-9:
