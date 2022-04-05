@@ -7,5 +7,6 @@ use App\Http\Livewire\{
 
 };
 Route::get('message', ShowMessage::class);
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('tweets', ShowTweets::class);
 Route::get('/', function () { return view('home');});
