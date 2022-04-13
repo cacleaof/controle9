@@ -6,12 +6,14 @@ use App\Http\Controllers\{
     UserControl,
     Admin\AdminController,
     Admin\TailControl,
-    Admin\ProjControl
+    Admin\ProjControl,
+    GoogleSheetsController
 };
 use App\Http\Livewire\{
     ShowTweets,
     ShowMessage
 };
+Route::get('googlesheets', [GoogleSheetsController::class, 'sheetOperation'])->name('googlesheet');
 Route::get('message', ShowMessage::class);
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('tweets', ShowTweets::class);

@@ -10,7 +10,8 @@ return [
         ], [
             'name' => 'Usuários',
             'url' => '/admin/users',
-            'icon' => 'fas fa-users'
+            'icon' => 'fas fa-users',
+            'can'  => 'administrador'
         ],
     ],
 

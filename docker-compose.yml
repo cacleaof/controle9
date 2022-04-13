@@ -3,7 +3,7 @@ version: "3.8"
 services:
     # image project
     app:
-        container_name: especializati-laravel-9
+        container_name: controle9
         build:
             context: .
             dockerfile: Dockerfile
@@ -17,20 +17,19 @@ services:
         networks: 
             - laravel-9
 
-    # db mysql
-    # mysql:
-    #     container_name: especializati-mysql
-    #     image: mysql:5.7.22
-    #     restart: unless-stopped
-    #     environment: 
-    #      - MYSQL_ROOT_PASSWORD=password
-    #      - MYSQL_DATABASE=telessaude
-    #     volumes: 
-    #         - ./.docker/mysql/dbdata:/var/lib/mysql
-    #     ports: 
-    #         - "3388:3306"
-    #     networks: 
-    #         - laravel-9
+# nginx
+    nginx:
+        container_name: especializati-nginx
+        image: nginx:latest
+        restart: unless-stopped
+        ports: 
+            - "8989:80"
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            - laravel-9
+    
     mysql:
         image: mysql:latest
         command: --default-authentication-plugin=mysql_native_password
@@ -42,6 +41,7 @@ services:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         networks: 
             - laravel-9
+
     phpmyadmin:
         image: phpmyadmin:latest
         restart: always
@@ -51,12 +51,11 @@ services:
             - PMA_ARBITRARY=1
         networks: 
             - laravel-9
-
-    # queue
+# queue
     queue:
         container_name: especializati-queue
         image: especializati/laravel9-app
-        restart: unless-stopped
+        restart: always
         command: "php artisan queue:work"
         volumes: 
             - ./:/var/www
@@ -66,39 +65,18 @@ services:
         networks: 
             - laravel-9
 
-    # redis
+# redis
     redis:
         container_name: especializati-redis
         image: redis:latest
         restart: unless-stopped
         networks: 
             - laravel-9
-    # phpmyadmin:
-    #     image: phpmyadmin
-    #     links:
-    #         - mysql
-    #     restart: always
-    #     ports:
-    #         - 8000:80
-    #     environment:
-    #         - PMA_ARBITRARY=1
-    #     depends_on: 
-    #         - mysql
-    #     networks: 
-    #         - laravel-9
-# nginx
-    nginx:
-        container_name: especializati-nginx
-        image: nginx:alpine
-        restart: unless-stopped
-        ports: 
-            - "8989:80"
-        volumes: 
-            - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
-        networks: 
-            - laravel-9
 
-networks: 
+networks:
     laravel-9:
         driver: bridge
+        ipam:
+         config:
+           - subnet: 10.5.0.0/16
+             gateway: 10.5.0.1
