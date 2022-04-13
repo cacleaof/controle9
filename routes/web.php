@@ -14,9 +14,9 @@ use App\Http\Livewire\{
     ShowMessage
 };
 Route::get('googlesheets', [GoogleSheetsController::class, 'sheetOperation'])->name('googlesheet');
-Route::get('message', ShowMessage::class);
+Route::get('/message', ShowMessage::class);
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('tweets', ShowTweets::class);
+Route::get('/tweets', ShowTweets::class);
 Route::get('/', function () { return view('home');});
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
